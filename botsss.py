@@ -16,7 +16,7 @@ sheet = book.active
 #for i in range(2, 13, 6):
 #    otr.append(str(sheet[i][0].value))
 #print(otr)
-bot = telebot.TeleBot("5795768012:AAF7vtBoABHnAxkoNp_ExfnDeJvwc_EobQ8")
+bot = telebot.TeleBot("Token")
 
 @bot.message_handler(commands=['start'])
 def start(message):
