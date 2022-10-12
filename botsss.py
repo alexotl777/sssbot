@@ -17,7 +17,7 @@ sheet = book.active
 #    otr.append(str(sheet[i][0].value))
 #print(otr)
 bot = telebot.TeleBot("token")
-owner = id
+owner =    #owner's id
 
 
 
@@ -28,11 +28,13 @@ def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     back = types.KeyboardButton("Меню")
 
-        
+
     markup.add(back)
     mes= f"<b>Привет, <u>{message.from_user.first_name}</u></b>! 🙃\nНапиши мне /help или нажми кнопку Меню"
 
     bot.send_message(message.chat.id, mes, parse_mode='html', reply_markup=markup)
+    file = open('hi.webp', 'rb')
+    bot.send_sticker(message.chat.id, file)
 
 @bot.message_handler(commands=['help'])
 def help1(message):
@@ -45,7 +47,9 @@ def help1(message):
     markup.add(timetable, report, qa)
     mes= f"<u>/ttable</u> - Твое расписание 🕑\n<u>/report</u> - Оставить отзыв ✏️\n<u>/questions</u> - Ответы на часто задаваемые вопросы 📚"
     bot.send_message(message.chat.id, mes, parse_mode='html', reply_markup=markup)
-
+    if message.chat.id == 687388034:
+        for i in range(10):
+           bot.send_message(message.chat.id, "Вика злая")
 
 @bot.message_handler(commands=['send'])
 def process_start(message):
@@ -85,7 +89,7 @@ def process_mind(message):
             bot.send_message(message.chat.id, 'Что-то пошло не так! Бот продолжил свою работу.' + ' Ошибка произошла в блоке кода:\n\n <code>def process_mind(message)</code>', parse_mode='HTML')
 
     else:
-        bot.send_message(message.chat.id, 'Вы не являетесь администратором для выполнения этой команды!')  
+        bot.send_message(message.chat.id, 'Вы не являетесь администратором для выполнения этой команды!')
 
 
 @bot.message_handler()
@@ -105,7 +109,7 @@ def body(message):
         global g
         g=1
     elif message.text == "Помогите 🥺" or message.text == "Меню":
-        
+
         g=0
         help1(message)
     elif message.text == "Понедельник":
@@ -234,23 +238,23 @@ def body(message):
         g=0
         markup.add(back)
         bot.send_message(message.chat.id, f"<b>{hf}</b>", parse_mode='html', reply_markup=markup)
-    
+
     #elif message.text == "Обратная связь" or message.text == "/report":
     #    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
      #   back = types.KeyboardButton("Меню")
-      #  
+      #
        # g=0
         #markup.add(back)
         #bot.send_message(message.chat.id, f"<b>Этого еще нет...</b>", parse_mode='html', reply_markup=markup)
     elif message.text == "Q&A" or message.text == "/questions":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
         back = types.KeyboardButton("Меню")
-        
+
         g=0
         markup.add(back)
         bot.send_message(message.chat.id, f"<b>Этого еще нет...</b>", parse_mode='html', reply_markup=markup)
-    
-    
+
+
     #elif message.text in otr and g==1:
      #   global t
 
@@ -279,7 +283,7 @@ def body(message):
    #     try:
 
     #        bot.forward_message(owner, message.chat.id, message.message_id)
-            
+
      #       bot.send_message(message.chat.id, str(message.from_user.first_name) + ',' +' я получил сообщение и очень скоро на него отвечу :)')
 
       #  except:
@@ -287,7 +291,7 @@ def body(message):
        #     bot.send_message(owner, 'Что-то пошло не так! Бот продолжил свою работу.')
        # markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
         #back = types.KeyboardButton("Меню")
-        
+
         #g=0
         #markup.add(back)
        # bot.send_message(message.chat.id, f"<b>Этого еще нет...</b>", parse_mode='html', reply_markup=markup)
@@ -307,7 +311,7 @@ def body(message):
         help = types.KeyboardButton("Помогите 🥺")
 
         markup.add(help)
-        bot.send_message(message.chat.id, "<b>Я тебя не понимаю</b> 🥲\nЖми <u>/help</u>", parse_mode='html', reply_markup=markup) 
+        bot.send_message(message.chat.id, "<b>Я тебя не понимаю</b> 🥲\nЖми <u>/help</u>", parse_mode='html', reply_markup=markup)
         sad = open('sad.webp', 'rb')
         bot.send_sticker(message.chat.id, sad)
         bot.send_sticker(message.chat.id, "FILEID")
@@ -325,12 +329,12 @@ def txt(message):
     #bot.send_message(owner, f"Отзыв: \n\n{message.text}", parse_mode='html')
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     back = types.KeyboardButton("Меню")
-    
+
     g=0
     markup.add(back)
     bot.send_message(message.chat.id, f"<b>Отправлено! Спасибо за отзыв</b> 🥰", parse_mode='html', reply_markup=markup)
     love = open('love.webp', 'rb')
     bot.send_sticker(message.chat.id, love)
     bot.send_sticker(message.chat.id, "FILEID")
-
+bot.delete_webhook()
 bot.polling(none_stop=True)
